@@ -1,0 +1,72 @@
+package quiz3;
+
+
+public class QuickSort {
+	private int[] array;
+    private int length;
+ 
+    public void sort(int[] inputArr) {
+         
+        if (inputArr == null || inputArr.length == 0) {
+            return;
+        }
+        
+        /////////////////////
+        array = inputArr;
+        length = inputArr.length;
+        quickSort(0,length-1);
+        
+        
+        /////////////////////
+    }
+ 
+    private void quickSort(int low, int high) {
+    	////////////////////////
+        
+    	int pivot_index = (low+high)/2;
+    	int pivot = array[pivot_index];
+    	int i = low;
+        int j = high;
+        
+        if(low == high)
+        	return ;
+        // Divide into two arrays
+        while (i <= j) {
+        	while(array[i]<pivot&&i<pivot_index){
+        		i++;
+        	}
+        	while(array[j]>pivot&&j>pivot_index){
+        		j--;
+        	}
+        	if(i==j){
+        		break;
+        	}
+            swap(i,j);
+            if(i==pivot_index){
+            	pivot_index = j;
+            	pivot = array[pivot_index];
+            }
+            else if(j==pivot_index){
+            	pivot_index = i;
+            	pivot = array[pivot_index];
+            }
+        }
+
+        // call quickSort() method recursively
+        if(pivot_index != high)
+        	quickSort(low,pivot_index);
+        if(pivot_index+1 != low)
+        	quickSort(pivot_index+1,high);
+        
+    	
+    	//////////////////////////
+    }
+ 
+    private void swap(int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+     
+  
+}
